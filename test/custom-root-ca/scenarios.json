@@ -1,0 +1,16 @@
+{
+    "custom": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "custom-root-ca": {
+                "name": "custom.crt"
+            }
+        }
+    },
+    "alpine": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "custom-root-ca": {}
+        }
+    }
+}

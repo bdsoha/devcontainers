@@ -1,0 +1,24 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "json.schemas": [
+                    {
+                        "fileMatch": [
+                            "*/devcontainer-feature.json"
+                        ],
+                        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+                    }
+                ]
+            },
+            "extensions": [
+                "mads-hartmann.bash-ide-vscode"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "updateContentCommand": "npm install -g @devcontainers/cli"
+}

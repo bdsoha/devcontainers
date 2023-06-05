@@ -1,0 +1,23 @@
+{
+    "id": "custom-root-ca",
+    "name": "Custom Root CA",
+    "version": "1.0.0",
+    "description": "🔒 Add a custom Root CA to your development environment",
+    "documentationURL": "https://github.com/bdsoha/dev-containers/tree/main/src/custom-root-ca",
+    "licenseURL": "https://github.com/bdsoha/dev-containers/blob/main/LICENSE",
+    "options": {
+        "name": {
+            "type": "string",
+            "default": "custom-root-ca.crt",
+            "description": "Name of the custom root CA"    
+        },
+        "source": {
+            "type": "string",
+            "default": "https://netfree.link/cacert/isp/018/ca.crt",
+            "description": "Remote location of the certificate in PEM format to be added"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
