@@ -2,24 +2,40 @@
 
 set -e
 
-echo "Activating feature '🔒 custom-root-ca'"
-
 download() {
-    url=$1
-    filename=$2
+    source=$1
+    name=$2
+
+    echo "⏬ Downloading certificate from ${source}"
+    echo "📁 Save certificate to ${name}"
 
     if [ -x "$(which wget)" ] ; then
-        wget -q $url -O $filename
+        wget -q $source -O $name
     elif [ -x "$(which curl)" ]; then
-        curl -sfL $url -o $filename
+        curl -sfL $source -o $name
     else
         echo "Could not find curl or wget, please install one."
         exit 1
     fi
 }
 
+echo "Activating feature '🔒 custom-root-ca'"
+
 mkdir -p /usr/local/share/ca-certificates
 
-download ${SOURCE} /usr/local/share/ca-certificates/${NAME}
+counter=0
+filename=$(echo $NAME | cut -d . -f 1)
+extension=$(echo $NAME | cut -d . -f 2-)
+
+while IFS=',' read -ra certs; do
+    for i in "${certs[@]}"; do
+        if [ $counter -eq 0 ]; then
+            download ${i} "/usr/local/share/ca-certificates/${filename}.${extension}"
+        else
+            download ${i} "/usr/local/share/ca-certificates/${filename}-${counter}.${extension}"
+        fi
+    done
+done <<< "${SOURCE}"
+
 
 update-ca-certificates
