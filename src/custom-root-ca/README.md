@@ -17,6 +17,7 @@
 |-----|-----|-----|-----|
 | name | Name of the custom root CA | string | custom-root-ca.crt |
 | source | Remote location *(or comma seperated locations)* of the certificate in PEM format to be added | string | https://netfree.link/cacert/isp/018/ca.crt |
+| bundle | Create a certificate bundle of all applied CAs | boolean | true |
 
 ## Override Feature Install Order
 
@@ -25,7 +26,7 @@ It is likely that you will need to have the custom CA certificate applied at an 
 ```jsonc
 // ...
 "overrideFeatureInstallOrder": [
-    "ghcr.io/bdsoha/devcontainers/custom-root-ca:1"
+    "ghcr.io/bdsoha/devcontainers/custom-root-ca"
 ],
 // ...
 ```
