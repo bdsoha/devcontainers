@@ -1,7 +1,7 @@
 {
     "id": "custom-root-ca",
     "name": "Custom Root CA",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "🔒 Add a custom Root CA to your development environment",
     "documentationURL": "https://github.com/bdsoha/dev-containers/tree/main/src/custom-root-ca",
     "licenseURL": "https://github.com/bdsoha/dev-containers/blob/main/LICENSE",
