@@ -1,6 +1,9 @@
 ## Override Feature Install Order
 
-It is likely that you will need to have the custom CA certificate applied at an early stage of the installation build. To override the order of installation, add the following to your `devcontainer.json` configuration:
+It is likely that you will need to have the custom CA certificate applied at an early stage of the installation build. 
+To override the order of installation, add the following to your `devcontainer.json` configuration:
+
+> **Note** The values of `overrideFeatureInstallOrder` do not contain the feature's version tag.
 
 ```jsonc
 // ...
