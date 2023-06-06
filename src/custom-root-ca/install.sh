@@ -21,21 +21,29 @@ download() {
 
 echo "🔛 Activating feature '🔒 custom-root-ca'"
 
-mkdir -p /usr/local/share/ca-certificates
-
 counter=0
 filename=$(echo $NAME | cut -d . -f 1)
 extension=$(echo $NAME | cut -d . -f 2-)
 certs=$(echo $SOURCE | tr ',' '\n')
+dest_dir=/usr/local/share/ca-certificates
+
+mkdir -p $dest_dir
 
 for i in $certs; do
     if [ $counter -eq 0 ]; then
-        download ${i} "/usr/local/share/ca-certificates/${filename}.${extension}"
+        download ${i} "${dest_dir}/${filename}.${extension}"
     else
-        download ${i} "/usr/local/share/ca-certificates/${filename}-${counter}.${extension}"
+        download ${i} "${dest_dir}/${filename}-${counter}.${extension}"
     fi
 
     counter=$((counter+1))
 done
+
+if [ "${BUNDLE}" = "true" ]; then
+    bundle="${filename}.bundle.crt"
+
+    echo "📦 Creating certificate bundle ${bundle}"
+    cat $(ls -1 -d "${dest_dir}/"* | grep "${filename}.*") > "${dest_dir}/${bundle}"
+fi
 
 update-ca-certificates

@@ -5,7 +5,7 @@ It is likely that you will need to have the custom CA certificate applied at an 
 ```jsonc
 // ...
 "overrideFeatureInstallOrder": [
-    "ghcr.io/bdsoha/devcontainers/custom-root-ca:1"
+    "ghcr.io/bdsoha/devcontainers/custom-root-ca"
 ],
 // ...
 ```

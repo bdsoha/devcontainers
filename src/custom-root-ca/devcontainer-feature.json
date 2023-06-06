@@ -1,7 +1,7 @@
 {
     "id": "custom-root-ca",
     "name": "Custom Root CA",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "🔒 Add a custom Root CA to your development environment",
     "documentationURL": "https://github.com/bdsoha/dev-containers/tree/main/src/custom-root-ca",
     "licenseURL": "https://github.com/bdsoha/dev-containers/blob/main/LICENSE",
@@ -19,6 +19,11 @@
                 "https://netfree.link/cacert/isp/018/ca.crt,https://netfree.link/cacert/isp/019/ca.crt"
             ],
             "description": "Remote location *(or comma seperated locations)* of the certificate in PEM format to be added"
+        },
+        "bundle": {
+            "type": "boolean",
+            "default": true,
+            "description": "Create a certificate bundle of all applied CAs"
         }
     },
     "installsAfter": [
