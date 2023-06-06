@@ -25,7 +25,7 @@ counter=0
 filename=$(echo $NAME | cut -d . -f 1)
 extension=$(echo $NAME | cut -d . -f 2-)
 certs=$(echo $SOURCE | tr ',' '\n')
-dest_dir=/usr/local/share/ca-certificates/extras
+dest_dir=/usr/local/share/ca-certificates
 
 mkdir -p $dest_dir
 
@@ -40,8 +40,10 @@ for i in $certs; do
 done
 
 if [ "${BUNDLE}" = "true" ]; then
-    echo "📦 Creating certificate bundle ${filename}.bundle.crt"
-    cat $(ls -1 $dest_dir) > "${dest_dir}/${filename}.bundle.crt"
+    bundle="${filename}.bundle.crt"
+
+    echo "📦 Creating certificate bundle ${bundle}"
+    cat $(ls -1 -d "${dest_dir}/"* | grep "${filename}.*") > "${dest_dir}/${bundle}"
 fi
 
 update-ca-certificates
