@@ -12,5 +12,14 @@
         "features": {
             "custom-root-ca": {}
         }
+    },
+    "multiple": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "custom-root-ca": {
+                "name": "custom.sub.crt",
+                "source": "https://netfree.link/cacert/isp/018/ca.crt,https://netfree.link/cacert/isp/019/ca.crt"
+            }
+        }
     }
 }

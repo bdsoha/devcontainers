@@ -14,7 +14,11 @@
         "source": {
             "type": "string",
             "default": "https://netfree.link/cacert/isp/018/ca.crt",
-            "description": "Remote location of the certificate in PEM format to be added"
+            "proposals": [
+                "https://netfree.link/cacert/isp/018/ca.crt",
+                "https://netfree.link/cacert/isp/018/ca.crt,https://netfree.link/cacert/isp/019/ca.crt"
+            ],
+            "description": "Remote location *(or comma seperated locations)* of the certificate in PEM format to be added"
         }
     },
     "installsAfter": [
