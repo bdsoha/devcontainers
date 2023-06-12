@@ -18,10 +18,14 @@
 | name | Name of the custom root CA | string | custom-root-ca.crt |
 | source | Remote location *(or comma seperated locations)* of the certificate in PEM format to be added | string | https://netfree.link/cacert/isp/018/ca.crt |
 | bundle | Create a certificate bundle of all applied CAs | boolean | true |
+| verify | Verify the downloaded SSL certificate | boolean | true |
 
 ## Override Feature Install Order
 
-It is likely that you will need to have the custom CA certificate applied at an early stage of the installation build. To override the order of installation, add the following to your `devcontainer.json` configuration:
+It is likely that you will need to have the custom CA certificate applied at an early stage of the installation build. 
+To override the order of installation, add the following to your `devcontainer.json` configuration:
+
+> **Note** The values of `overrideFeatureInstallOrder` does not contain the feature's version tag.
 
 ```jsonc
 // ...
@@ -34,6 +38,7 @@ It is likely that you will need to have the custom CA certificate applied at an 
 ## Compatible Base Images
 
 This feature was tested with the following base images *(and should work with all of their variants)*:
+
 - `mcr.microsoft.com/devcontainers/base:ubuntu`
 - `mcr.microsoft.com/devcontainers/base:debian`
 - `mcr.microsoft.com/devcontainers/base:alpine`
