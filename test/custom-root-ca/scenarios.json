@@ -4,7 +4,8 @@
         "features": {
             "custom-root-ca": {
                 "name": "custom.crt",
-                "bundle": false
+                "bundle": false,
+                "verify": false
             }
         }
     },

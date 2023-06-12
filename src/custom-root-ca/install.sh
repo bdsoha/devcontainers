@@ -2,20 +2,50 @@
 
 set -e
 
+fatal()
+{
+    echo "⛔ " "$@" >&2
+    exit 1
+}
+
+insecure_flag() {
+    local downloader=$1
+    local flag=""
+
+    if [ "${VERIFY}" = "false" ]; then
+        echo "🙈 Ignoring security verification"
+
+        case $downloader in
+            curl)
+                flag="--insecure"
+                ;;
+            wget)
+                flag="--no-check-certificate"
+                ;;
+            *)
+                fatal "Incorrect downloader executable [${downloader}]"
+                ;;
+        esac
+    fi
+
+    echo $flag
+}
+
 download() {
-    source=$1
-    name=$2
+    local source=$1
+    local name=$2
 
     echo "⏬ Downloading certificate from ${source}"
     echo "📁 Save certificate to ${name}"
 
     if [ -x "$(which wget)" ] ; then
-        wget -q $source -O $name
+        flag=$(insecure_flag wget)
+        wget -q $flag $source -O $name
     elif [ -x "$(which curl)" ]; then
-        curl -sfL $source -o $name
+        flag=$(insecure_flag curl)
+        curl -sfL $flag $source -o $name
     else
-        echo "⛔ Could not find curl or wget, please install one."
-        exit 1
+        fatal "Could not find curl or wget, please install one."
     fi
 }
 
