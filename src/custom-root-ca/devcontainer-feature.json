@@ -28,7 +28,7 @@
         "verify": {
             "type": "boolean",
             "default": true,
-            "description": "Ignore verifying the downloaded SSL certificate"
+            "description": "Verify the downloaded SSL certificate"
         }
     },
     "installsAfter": [

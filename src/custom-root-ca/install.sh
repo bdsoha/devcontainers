@@ -8,9 +8,9 @@ fatal()
     exit 1
 }
 
-insecure_flag() {
+set_insecure_flag() {
     local downloader=$1
-    local flag=""
+    flag=""
 
     if [ "${VERIFY}" = "false" ]; then
         echo "🙈 Ignoring security verification"
@@ -27,8 +27,6 @@ insecure_flag() {
                 ;;
         esac
     fi
-
-    echo $flag
 }
 
 download() {
@@ -39,13 +37,24 @@ download() {
     echo "📁 Save certificate to ${name}"
 
     if [ -x "$(which wget)" ] ; then
-        flag=$(insecure_flag wget)
+        set_insecure_flag wget
         wget -q $flag $source -O $name
     elif [ -x "$(which curl)" ]; then
-        flag=$(insecure_flag curl)
+        set_insecure_flag curl
         curl -sfL $flag $source -o $name
     else
         fatal "Could not find curl or wget, please install one."
+    fi
+}
+
+create_bundle() {
+    local filename=$1
+
+    if [ "${BUNDLE}" = "true" ]; then
+        local bundle="${filename}.bundle.crt"
+
+        echo "📦 Creating certificate bundle ${bundle}"
+        cat $(ls -1 -d "${dest_dir}/"* | grep "${filename}.*") > "${dest_dir}/${bundle}"
     fi
 }
 
@@ -69,11 +78,6 @@ for i in $certs; do
     counter=$((counter+1))
 done
 
-if [ "${BUNDLE}" = "true" ]; then
-    bundle="${filename}.bundle.crt"
-
-    echo "📦 Creating certificate bundle ${bundle}"
-    cat $(ls -1 -d "${dest_dir}/"* | grep "${filename}.*") > "${dest_dir}/${bundle}"
-fi
+create_bundle $filename
 
 update-ca-certificates
